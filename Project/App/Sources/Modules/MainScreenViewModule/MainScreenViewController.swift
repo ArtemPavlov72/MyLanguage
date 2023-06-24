@@ -66,7 +66,16 @@ final class MainScreenViewController: MainScreenModule {
 
 // MARK: - MainScreenViewOutput
 
-extension MainScreenViewController: MainScreenViewOutput {}
+extension MainScreenViewController: MainScreenViewOutput {
+  func answerButtonAction() {
+
+  }
+
+  func answerTextDidChange(_ text: String?) {
+    
+  }
+
+}
 
 // MARK: - MainScreenInteractorOutput
 

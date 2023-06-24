@@ -8,7 +8,17 @@
 import UIKit
 
 /// События которые отправляем из View в Presenter
-protocol MainScreenViewOutput: AnyObject {}
+protocol MainScreenViewOutput: AnyObject {
+
+  /// Текст в текстовом поле был изменен
+  /// - Parameters:
+  ///  - text: Значение для текстового поля
+  func answerTextDidChange(_ text: String?)
+
+  /// Было нажатие на кнопку ответить
+  func answerButtonAction()
+
+}
 
 /// События которые отправляем от Presenter ко View
 protocol MainScreenViewInput {}
@@ -24,6 +34,9 @@ final class MainScreenView: MainScreenViewProtocol {
   weak var output: MainScreenViewOutput?
   
   // MARK: - Private properties
+
+  private let questionLabel = UILabel()
+  private let answerButton = UIButton()
   
   // MARK: - Initialization
   
@@ -44,15 +57,47 @@ final class MainScreenView: MainScreenViewProtocol {
 // MARK: - Private
 
 private extension MainScreenView {
-  func configureLayout() {}
+  func configureLayout() {
+    let appearance = Appearance()
+
+    [questionLabel, answerButton].forEach {
+      $0.translatesAutoresizingMaskIntoConstraints = false
+      addSubview($0)
+    }
+
+    NSLayoutConstraint.activate([
+      questionLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                             constant: appearance.defaultInset),
+      questionLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                              constant: -appearance.defaultInset),
+      questionLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: appearance.defaultInset),
+
+      answerButton.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                              constant: appearance.defaultInset),
+      answerButton.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                               constant: -appearance.defaultInset),
+      answerButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
+                                             constant: -appearance.defaultInset)
+    ])
+
+  }
   
   func applyDefaultBehavior() {
-    backgroundColor = .white
+    let appearance = Appearance()
+
+    backgroundColor = .gray
+
+    answerButton.setTitle(appearance.buttonTitle, for: .normal)
+    questionLabel.text = appearance.labelText
   }
 }
 
 // MARK: - Appearance
 
 private extension MainScreenView {
-  struct Appearance {}
+  struct Appearance {
+    let defaultInset: CGFloat = 16
+    let labelText = "Вопрос"
+    let buttonTitle = "Ответить"
+  }
 }

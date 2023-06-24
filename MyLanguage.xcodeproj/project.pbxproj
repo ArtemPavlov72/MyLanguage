@@ -11,6 +11,7 @@
 		AC0DADFC2A2A05B500B7F4F9 /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0DADFB2A2A05B500B7F4F9 /* RootCoordinator.swift */; };
 		AC0DAE032A2A0A5B00B7F4F9 /* MainScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0DAE022A2A0A5B00B7F4F9 /* MainScreenCoordinator.swift */; };
 		AC0DAE052A2A0B0500B7F4F9 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0DAE042A2A0B0500B7F4F9 /* Coordinator.swift */; };
+		ACD783612A3793F900B3D180 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD783602A3793F900B3D180 /* DataManager.swift */; };
 		ACF2F81D2A12A691000DBDB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2F81C2A12A691000DBDB4 /* AppDelegate.swift */; };
 		ACF2F8262A12A693000DBDB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACF2F8252A12A693000DBDB4 /* Assets.xcassets */; };
 		ACF2F8292A12A693000DBDB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACF2F8272A12A693000DBDB4 /* LaunchScreen.storyboard */; };
@@ -26,6 +27,7 @@
 		AC0DADFB2A2A05B500B7F4F9 /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
 		AC0DAE022A2A0A5B00B7F4F9 /* MainScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainScreenCoordinator.swift; path = Project/MainScreenCoordinator.swift; sourceTree = SOURCE_ROOT; };
 		AC0DAE042A2A0B0500B7F4F9 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		ACD783602A3793F900B3D180 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		ACF2F8192A12A691000DBDB4 /* MyLanguage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyLanguage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF2F81C2A12A691000DBDB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACF2F8252A12A693000DBDB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 		AC0DAE002A2A09EB00B7F4F9 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				ACD7835F2A3793E200B3D180 /* ApplicationServices */,
 				AC0DADFD2A2A098500B7F4F9 /* Modules */,
 			);
 			path = Sources;
@@ -90,6 +93,14 @@
 				AC0DADFE2A2A09B200B7F4F9 /* MainScreenCoordinator */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		ACD7835F2A3793E200B3D180 /* ApplicationServices */ = {
+			isa = PBXGroup;
+			children = (
+				ACD783602A3793F900B3D180 /* DataManager.swift */,
+			);
+			path = ApplicationServices;
 			sourceTree = "<group>";
 		};
 		ACF2F8102A12A691000DBDB4 = {
@@ -227,6 +238,7 @@
 				ACF2F8362A178F4D000DBDB4 /* MainScreenViewController.swift in Sources */,
 				AC0DADFC2A2A05B500B7F4F9 /* RootCoordinator.swift in Sources */,
 				AC0DAE032A2A0A5B00B7F4F9 /* MainScreenCoordinator.swift in Sources */,
+				ACD783612A3793F900B3D180 /* DataManager.swift in Sources */,
 				ACF2F81D2A12A691000DBDB4 /* AppDelegate.swift in Sources */,
 				ACF2F8382A178F4D000DBDB4 /* MainScreenInteractor.swift in Sources */,
 			);
