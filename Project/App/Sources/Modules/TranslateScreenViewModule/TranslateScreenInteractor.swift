@@ -1,5 +1,5 @@
 //
-//  MainScreenInteractor.swift
+//  TranslateScreenInteractor.swift
 //  MyLanguage
 //
 //  Created by Artem Pavlov on 19.05.2023.
@@ -8,23 +8,30 @@
 import UIKit
 
 /// События которые отправляем из Interactor в Presenter
-protocol MainScreenInteractorOutput: AnyObject {}
+protocol TranslateScreenInteractorOutput: AnyObject {}
 
 /// События которые отправляем от Presenter к Interactor
-protocol MainScreenInteractorInput {}
+protocol TranslateScreenInteractorInput {}
 
 /// Интерактор
-final class MainScreenInteractor: MainScreenInteractorInput {
+final class TranslateScreenInteractor: TranslateScreenInteractorInput {
+
+
   
   // MARK: - Internal properties
   
-  weak var output: MainScreenInteractorOutput?
+  weak var output: TranslateScreenInteractorOutput?
   
   // MARK: - Internal func
+
 }
+
+// MARK: - Private
+
+private extension TranslateScreenInteractor {}
 
 // MARK: - Appearance
 
-private extension MainScreenInteractor {
+private extension TranslateScreenInteractor {
   struct Appearance {}
 }

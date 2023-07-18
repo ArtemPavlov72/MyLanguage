@@ -1,5 +1,5 @@
 //
-//  DataManager.swift
+//  DataManagerService.swift
 //  MyLanguage
 //
 //  Created by Artem Pavlov on 12.06.2023.
@@ -7,13 +7,13 @@
 
 import Foundation
 
-class DataManager {
+class DataManagerService {
 
-  static let shared = DataManager()
+  static let shared = DataManagerService()
 
   private init() {}
 
-  let dictionary: [String: String] = [
+  let mockDictionaryVB: [String: String] = [
     "Officiator" : "Судья",
     "Court": "Суд",
     "Solemn": "Торжественный",

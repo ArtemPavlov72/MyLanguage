@@ -1,5 +1,5 @@
 //
-//  MainScreenViewController.swift
+//  TranslateScreenViewController.swift
 //  MyLanguage
 //
 //  Created by Artem Pavlov on 19.05.2023.
@@ -8,30 +8,30 @@
 import UIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
-protocol MainScreenModuleOutput: AnyObject {}
+protocol TranslateScreenModuleOutput: AnyObject {}
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
-protocol MainScreenModuleInput {
+protocol TranslateScreenModuleInput {
   
   /// События которые отправляем из `текущего модуля` в `другой модуль`
-  var moduleOutput: MainScreenModuleOutput? { get set }
+  var moduleOutput: TranslateScreenModuleOutput? { get set }
 }
 
-/// Готовый модуль `MainScreenModule`
-typealias MainScreenModule = UIViewController & MainScreenModuleInput
+/// Готовый модуль `TranslateScreenModule`
+typealias TranslateScreenModule = UIViewController & TranslateScreenModuleInput
 
 /// Презентер
-final class MainScreenViewController: MainScreenModule {
+final class TranslateScreenViewController: TranslateScreenModule {
   
   // MARK: - Internal properties
   
-  weak var moduleOutput: MainScreenModuleOutput?
+  weak var moduleOutput: TranslateScreenModuleOutput?
   
   // MARK: - Private properties
   
-  private let interactor: MainScreenInteractorInput
-  private let moduleView: MainScreenViewProtocol
-  private let factory: MainScreenFactoryInput
+  private let interactor: TranslateScreenInteractorInput
+  private let moduleView: TranslateScreenViewProtocol
+  private let factory: TranslateScreenFactoryInput
   
   // MARK: - Initialization
   
@@ -39,9 +39,9 @@ final class MainScreenViewController: MainScreenModule {
   ///   - moduleView: вью
   ///   - interactor: интерактор
   ///   - factory: фабрика
-  init(moduleView: MainScreenViewProtocol,
-       interactor: MainScreenInteractorInput,
-       factory: MainScreenFactoryInput) {
+  init(moduleView: TranslateScreenViewProtocol,
+       interactor: TranslateScreenInteractorInput,
+       factory: TranslateScreenFactoryInput) {
     self.moduleView = moduleView
     self.interactor = interactor
     self.factory = factory
@@ -64,33 +64,28 @@ final class MainScreenViewController: MainScreenModule {
   }
 }
 
-// MARK: - MainScreenViewOutput
+// MARK: - TranslateScreenViewOutput
 
-extension MainScreenViewController: MainScreenViewOutput {
+extension TranslateScreenViewController: TranslateScreenViewOutput {
   func answerButtonAction() {
 
   }
-
-  func answerTextDidChange(_ text: String?) {
-    
-  }
-
 }
 
-// MARK: - MainScreenInteractorOutput
+// MARK: - TranslateScreenInteractorOutput
 
-extension MainScreenViewController: MainScreenInteractorOutput {}
+extension TranslateScreenViewController: TranslateScreenInteractorOutput {}
 
-// MARK: - MainScreenFactoryOutput
+// MARK: - TranslateScreenFactoryOutput
 
-extension MainScreenViewController: MainScreenFactoryOutput {}
+extension TranslateScreenViewController: TranslateScreenFactoryOutput {}
 
 // MARK: - Private
 
-private extension MainScreenViewController {}
+private extension TranslateScreenViewController {}
 
 // MARK: - Appearance
 
-private extension MainScreenViewController {
+private extension TranslateScreenViewController {
   struct Appearance {}
 }

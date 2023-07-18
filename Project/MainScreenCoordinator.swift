@@ -31,7 +31,7 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
   // MARK: - Private variables
 
   private let navigationController: UINavigationController
-  private var mainScreenModule: MainScreenModule?
+  private var mainScreenModule: TranslateScreenModule?
   private var anyCoordinator: Coordinator?
   private let window: UIWindow?
 
@@ -49,11 +49,11 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
   // MARK: - Internal func
 
   func start() {
-    let mainScreenModule = MainScreenAssembly().createModule()
-    self.mainScreenModule = mainScreenModule
+    let questionScreenModule = QuestionsScreenAssembly().createModule()
+    self.mainScreenModule = questionScreenModule
     self.mainScreenModule?.moduleOutput = self
 
-    navigationController.pushViewController(mainScreenModule, animated: true)
+    navigationController.pushViewController(questionScreenModule, animated: true)
 
   }
 
@@ -64,7 +64,7 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
 
 // MARK: - MainScreenModuleOutput
 
-extension MainScreenCoordinator: MainScreenModuleOutput {
+extension MainScreenCoordinator: TranslateScreenModuleOutput {
 
   func mainScreenModuleWillAppear() {}
 

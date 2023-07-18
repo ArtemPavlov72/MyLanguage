@@ -1,5 +1,5 @@
 //
-//  MainScreenFactory.swift
+//  TranslateScreenFactory.swift
 //  MyLanguage
 //
 //  Created by Artem Pavlov on 19.05.2023.
@@ -8,23 +8,23 @@
 import UIKit
 
 /// Cобытия которые отправляем из Factory в Presenter
-protocol MainScreenFactoryOutput: AnyObject {}
+protocol TranslateScreenFactoryOutput: AnyObject {}
 
 /// Cобытия которые отправляем от Presenter к Factory
-protocol MainScreenFactoryInput {}
+protocol TranslateScreenFactoryInput {}
 
 /// Фабрика
-final class MainScreenFactory: MainScreenFactoryInput {
+final class TranslateScreenFactory: TranslateScreenFactoryInput {
   
   // MARK: - Internal properties
   
-  weak var output: MainScreenFactoryOutput?
+  weak var output: TranslateScreenFactoryOutput?
   
   // MARK: - Internal func
 }
 
 // MARK: - Appearance
 
-private extension MainScreenFactory {
+private extension TranslateScreenFactory {
   struct Appearance {}
 }
