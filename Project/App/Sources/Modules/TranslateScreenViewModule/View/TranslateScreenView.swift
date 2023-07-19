@@ -16,13 +16,20 @@ protocol TranslateScreenViewOutput: AnyObject {
 }
 
 /// События которые отправляем от Presenter ко View
-protocol TranslateScreenViewInput {}
+protocol TranslateScreenViewInput {
+
+  /// Устанавливаем данные в result
+  ///  - Parameter result: результат генерации
+  func setWordForTranslate(_ word: String?)
+}
 
 /// Псевдоним протокола UIView & TranslateScreenViewInput
 typealias TranslateScreenViewProtocol = UIView & TranslateScreenViewInput
 
 /// View для экрана
 final class TranslateScreenView: TranslateScreenViewProtocol {
+
+
   
   // MARK: - Internal properties
   
@@ -51,6 +58,10 @@ final class TranslateScreenView: TranslateScreenViewProtocol {
   }
   
   // MARK: - Internal func
+
+  func setWordForTranslate(_ word: String?) {
+    textQuestionLabel.text = word
+  }
 }
 
 // MARK: - Private

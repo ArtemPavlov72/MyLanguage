@@ -13,7 +13,11 @@ class DataManagerService {
 
   private init() {}
 
-  let mockDictionaryVB: [String: String] = [
+  func getMockWordsForTranslate() -> [TranslateWordModel] {
+    mockDictionaryVB.compactMap { TranslateWordModel(word: $0.key, translation: $0.value) }
+  }
+
+  private let mockDictionaryVB: [String: String] = [
     "Officiator" : "Судья",
     "Court": "Суд",
     "Solemn": "Торжественный",

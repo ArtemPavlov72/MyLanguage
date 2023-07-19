@@ -60,7 +60,8 @@ final class TranslateScreenViewController: TranslateScreenModule {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
+    interactor.getContent()
   }
 }
 
@@ -74,7 +75,15 @@ extension TranslateScreenViewController: TranslateScreenViewOutput {
 
 // MARK: - TranslateScreenInteractorOutput
 
-extension TranslateScreenViewController: TranslateScreenInteractorOutput {}
+extension TranslateScreenViewController: TranslateScreenInteractorOutput {
+  func didReceive(_ word: String?) {
+    moduleView.setWordForTranslate(word)
+  }
+
+  func somethingWentWrong() {
+
+  }
+}
 
 // MARK: - TranslateScreenFactoryOutput
 

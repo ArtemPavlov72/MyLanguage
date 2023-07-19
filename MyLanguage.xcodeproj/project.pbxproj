@@ -97,6 +97,54 @@
 			path = Navigation;
 			sourceTree = "<group>";
 		};
+		AC54045D2A66B57000E78712 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2F8322A178F4D000DBDB4 /* TranslateScreenAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		AC54045E2A66B57A00E78712 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2F8302A178F4D000DBDB4 /* TranslateScreenFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		AC54045F2A66B58500E78712 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2F8332A178F4D000DBDB4 /* TranslateScreenInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		AC5404602A66B58E00E78712 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AC54045B2A66A8CA00E78712 /* TranslateScreenModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AC5404612A66B59400E78712 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2F8312A178F4D000DBDB4 /* TranslateScreenViewController.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		AC5404622A66B59F00E78712 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2F8342A178F4D000DBDB4 /* TranslateScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		ACD7835F2A3793E200B3D180 /* ApplicationServices */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,12 +182,12 @@
 		ACF2F83A2A178F86000DBDB4 /* TranslateScreenViewModule */ = {
 			isa = PBXGroup;
 			children = (
-				ACF2F8302A178F4D000DBDB4 /* TranslateScreenFactory.swift */,
-				ACF2F8312A178F4D000DBDB4 /* TranslateScreenViewController.swift */,
-				ACF2F8322A178F4D000DBDB4 /* TranslateScreenAssembly.swift */,
-				ACF2F8332A178F4D000DBDB4 /* TranslateScreenInteractor.swift */,
-				AC54045B2A66A8CA00E78712 /* TranslateScreenModel.swift */,
-				ACF2F8342A178F4D000DBDB4 /* TranslateScreenView.swift */,
+				AC54045D2A66B57000E78712 /* Assembly */,
+				AC54045E2A66B57A00E78712 /* Factory */,
+				AC54045F2A66B58500E78712 /* Interactor */,
+				AC5404602A66B58E00E78712 /* Models */,
+				AC5404612A66B59400E78712 /* Presenter */,
+				AC5404622A66B59F00E78712 /* View */,
 			);
 			path = TranslateScreenViewModule;
 			sourceTree = "<group>";
