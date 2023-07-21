@@ -11,8 +11,7 @@ import UIKit
 protocol TranslateScreenViewOutput: AnyObject {
 
   /// Было нажатие на кнопку ответить
-  func answerButtonAction()
-
+  func translateButtonPressed(with answerWord: String, translation: String?)
 }
 
 /// События которые отправляем от Presenter ко View
@@ -21,6 +20,10 @@ protocol TranslateScreenViewInput {
   /// Устанавливаем данные в result
   ///  - Parameter result: результат генерации
   func setWordForTranslate(_ word: String?)
+
+  func setRightAnswerCount(_ text: String?)
+
+  func setWrongAnswerCount(_ text: String?)
 }
 
 /// Псевдоним протокола UIView & TranslateScreenViewInput
@@ -29,8 +32,6 @@ typealias TranslateScreenViewProtocol = UIView & TranslateScreenViewInput
 /// View для экрана
 final class TranslateScreenView: TranslateScreenViewProtocol {
 
-
-  
   // MARK: - Internal properties
   
   weak var output: TranslateScreenViewOutput?
@@ -39,9 +40,15 @@ final class TranslateScreenView: TranslateScreenViewProtocol {
 
   private let questionLabel = UILabel()
   private let textQuestionLabel = UILabel()
+
   private let answerStackView = UIStackView()
   private let answerLabel = UILabel()
   private let answerTextField = UITextField()
+
+  private let rightAnswersLabel = UILabel()
+  private let wrongAnswersLabel = UILabel()
+  private let rightWrongStackView = UIStackView()
+
   private let answerButton = UIButton()
   
   // MARK: - Initialization
@@ -62,6 +69,14 @@ final class TranslateScreenView: TranslateScreenViewProtocol {
   func setWordForTranslate(_ word: String?) {
     textQuestionLabel.text = word
   }
+
+  func setRightAnswerCount(_ text: String?) {
+    rightAnswersLabel.text = text
+  }
+
+  func setWrongAnswerCount(_ text: String?) {
+    wrongAnswersLabel.text = text
+  }
 }
 
 // MARK: - Private
@@ -75,7 +90,12 @@ private extension TranslateScreenView {
       answerStackView.addArrangedSubview($0)
     }
 
-    [questionLabel, textQuestionLabel, answerStackView, answerButton].forEach {
+    [rightAnswersLabel, wrongAnswersLabel].forEach {
+      $0.translatesAutoresizingMaskIntoConstraints = false
+      rightWrongStackView.addArrangedSubview($0)
+    }
+
+    [questionLabel, textQuestionLabel, answerStackView, rightWrongStackView, answerButton].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
@@ -83,6 +103,10 @@ private extension TranslateScreenView {
     answerStackView.axis = .vertical
     answerStackView.distribution = .fillEqually
     answerStackView.spacing = appearance.defaultInset
+
+    rightWrongStackView.axis = .horizontal
+    rightWrongStackView.distribution = .fillEqually
+    rightWrongStackView.spacing = appearance.defaultInset
 
     NSLayoutConstraint.activate([
       questionLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
@@ -104,6 +128,13 @@ private extension TranslateScreenView {
       answerStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
       answerStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
 
+      rightWrongStackView.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                            constant: appearance.defaultInset),
+      rightWrongStackView.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                             constant: -appearance.defaultInset),
+      rightWrongStackView.bottomAnchor.constraint(equalTo: answerButton.topAnchor,
+                                           constant: -appearance.defaultInset),
+
       answerButton.leadingAnchor.constraint(equalTo: leadingAnchor,
                                             constant: appearance.defaultInset),
       answerButton.trailingAnchor.constraint(equalTo: trailingAnchor,
@@ -120,9 +151,29 @@ private extension TranslateScreenView {
     
     answerButton.setTitle(appearance.buttonTitle, for: .normal)
     answerButton.backgroundColor = appearance.buttonColor
+    answerButton.addTarget(self, action: #selector(answerButtonAction), for: .touchUpInside)
+    answerButton.layer.cornerRadius = 8
+    answerButton.setTitleColor(.darkText, for: .highlighted)
+
+    rightAnswersLabel.text = "Верно:"
+    rightAnswersLabel.textColor = .systemGreen
+    wrongAnswersLabel.text = "Не верно:"
+    wrongAnswersLabel.textColor = .systemRed
+
     answerTextField.placeholder = appearance.answerPlaceholderText
     questionLabel.text = appearance.labelText
     answerLabel.text = appearance.answerLabelText
+  }
+
+  @objc
+  func answerButtonAction() {
+    guard let translationText = answerTextField.text,
+          !translationText.isEmpty,
+          let answerText = textQuestionLabel.text else {
+      return
+    }
+
+    output?.translateButtonPressed(with: answerText, translation: translationText)
   }
 }
 
@@ -140,8 +191,8 @@ extension TranslateScreenView: UITextFieldDelegate {
 private extension TranslateScreenView {
   struct Appearance {
     let defaultInset: CGFloat = 16
-    let labelText = "Вопрос"
-    let answerLabelText = "Ответ"
+    let labelText = "Слово для перевода"
+    let answerLabelText = "Ваш ответ"
     let answerPlaceholderText = "Введите ответ"
     let buttonTitle = "Ответить"
     let buttonColor: UIColor = .gray

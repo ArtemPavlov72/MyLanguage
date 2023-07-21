@@ -68,20 +68,24 @@ final class TranslateScreenViewController: TranslateScreenModule {
 // MARK: - TranslateScreenViewOutput
 
 extension TranslateScreenViewController: TranslateScreenViewOutput {
-  func answerButtonAction() {
-
+  func translateButtonPressed(with answerWord: String, translation: String?) {
+    interactor.translateButtonAction(with: answerWord, translation: translation)
   }
 }
 
 // MARK: - TranslateScreenInteractorOutput
 
 extension TranslateScreenViewController: TranslateScreenInteractorOutput {
+  func getRightAnswer(_ text: String?) {
+    moduleView.setRightAnswerCount(text)
+  }
+  
+  func getWrongAnswer(_ text: String?) {
+    moduleView.setWrongAnswerCount(text)
+  }
+  
   func didReceive(_ word: String?) {
     moduleView.setWordForTranslate(word)
-  }
-
-  func somethingWentWrong() {
-
   }
 }
 

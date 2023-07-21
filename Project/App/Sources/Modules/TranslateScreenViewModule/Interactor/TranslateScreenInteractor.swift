@@ -14,16 +14,19 @@ protocol TranslateScreenInteractorOutput: AnyObject {
   ///  - Parameter text: Текст со словом для перевода
   func didReceive(_ word: String?)
 
-  /// Что-то пошло не так
-  func somethingWentWrong()
+  func getRightAnswer(_ text: String?)
+
+  func getWrongAnswer(_ text: String?)
 }
 
 /// События которые отправляем от Presenter к Interactor
 protocol TranslateScreenInteractorInput {
 
+  /// Получить слова для перевода
   func getContent()
 
-  func translateButtonAction()
+  /// Пользователь нажал на кнопку ответа
+  func translateButtonAction(with answerWord: String, translation: String?)
 }
 
 /// Интерактор
@@ -36,16 +39,29 @@ final class TranslateScreenInteractor: TranslateScreenInteractorInput {
   // MARK: - Private property
 
   private var cashedWords: [TranslateWordModel] = []
+  private var rightCount = 0
+  private var wrongCount = 0
   
   // MARK: - Internal func
 
   func getContent() {
-    cashedWords = DataManagerService.shared.getMockWordsForTranslate()
+    cashedWords = DataManagerService.shared.getMockWordsForTranslate().shuffled()
     getWordForTranslation()
   }
 
-  func translateButtonAction() {
-    
+  func translateButtonAction(with answerWord: String, translation: String?) {
+    let correctTranslation = cashedWords.filter { $0.word == answerWord }.first?.translation
+
+    cashedWords.removeLast()
+
+    if correctTranslation == translation {
+      rightCount += 1
+      output?.getRightAnswer("Верно: \(rightCount)")
+    } else {
+      wrongCount += 1
+      output?.getWrongAnswer("Не верно: \(wrongCount)")
+    }
+    getWordForTranslation()
   }
 }
 
@@ -53,10 +69,8 @@ final class TranslateScreenInteractor: TranslateScreenInteractorInput {
 
 private extension TranslateScreenInteractor {
   func getWordForTranslation() {
-    let wordForTranslate = cashedWords.randomElement()?.word ?? ""
-    output?.didReceive(wordForTranslate)
+    output?.didReceive(cashedWords.last?.word)
   }
-
 }
 
 // MARK: - Appearance
