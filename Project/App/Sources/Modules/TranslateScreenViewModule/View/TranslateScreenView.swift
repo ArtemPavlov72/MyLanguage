@@ -155,9 +155,9 @@ private extension TranslateScreenView {
     answerButton.layer.cornerRadius = 8
     answerButton.setTitleColor(.darkText, for: .highlighted)
 
-    rightAnswersLabel.text = "Верно:"
+    rightAnswersLabel.text = "Верно: 0"
     rightAnswersLabel.textColor = .systemGreen
-    wrongAnswersLabel.text = "Не верно:"
+    wrongAnswersLabel.text = "Не верно: 0"
     wrongAnswersLabel.textColor = .systemRed
 
     answerTextField.placeholder = appearance.answerPlaceholderText
@@ -174,6 +174,7 @@ private extension TranslateScreenView {
     }
 
     output?.translateButtonPressed(with: answerText, translation: translationText)
+    answerTextField.text = ""
   }
 }
 
