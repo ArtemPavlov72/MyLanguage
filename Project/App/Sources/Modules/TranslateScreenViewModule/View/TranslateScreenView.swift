@@ -129,11 +129,11 @@ private extension TranslateScreenView {
       answerStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
 
       rightWrongStackView.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                            constant: appearance.defaultInset),
+                                                   constant: appearance.defaultInset),
       rightWrongStackView.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                             constant: -appearance.defaultInset),
+                                                    constant: -appearance.defaultInset),
       rightWrongStackView.bottomAnchor.constraint(equalTo: answerButton.topAnchor,
-                                           constant: -appearance.defaultInset),
+                                                  constant: -appearance.defaultInset),
 
       answerButton.leadingAnchor.constraint(equalTo: leadingAnchor,
                                             constant: appearance.defaultInset),
@@ -161,6 +161,8 @@ private extension TranslateScreenView {
     wrongAnswersLabel.textColor = .systemRed
 
     answerTextField.placeholder = appearance.answerPlaceholderText
+    answerTextField.returnKeyType = .done
+    answerTextField.delegate = self
     questionLabel.text = appearance.labelText
     answerLabel.text = appearance.answerLabelText
   }
@@ -181,8 +183,13 @@ private extension TranslateScreenView {
 // MARK: - UITextFieldDelegate
 
 extension TranslateScreenView: UITextFieldDelegate {
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesBegan(touches, with: event)
+    self.endEditing(true)
+  }
+
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    textField.resignFirstResponder()
+    answerButtonAction()
     return true
   }
 }
